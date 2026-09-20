@@ -1,0 +1,95 @@
+:root{
+  --bg:#fff9f7;
+  --card:#ffffff;
+  --ink:#4b3f45;
+  --muted:#8f7f86;
+  --pink:#e890aa;
+  --pink2:#fbe3ea;
+  --peach:#f4b38d;
+  --sage:#a8c7b1;
+  --line:#f1e5e8;
+  --shadow:0 12px 30px rgba(105,72,83,.08);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#fff6f3,#fffdfb);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:900px;margin:auto;padding:16px 14px 90px}
+.hero{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;padding:14px 4px}
+.eyebrow,.label{color:#b36e82;font-weight:800;font-size:.82rem;letter-spacing:.08em;margin:0 0 5px}
+h1{margin:0;font-size:clamp(1.8rem,4vw,2.6rem)}
+h2{margin:4px 0 10px;font-size:1.35rem}
+.hero-copy{color:var(--muted);margin:7px 0 0}
+.day-box{background:var(--pink2);border-radius:18px;padding:11px 14px;text-align:center;min-width:110px}
+.day-box span{display:block;font-size:.75rem;color:var(--muted)}
+.day-box strong{display:block;margin-top:2px}
+.tabs{
+  position:sticky;top:0;z-index:5;display:flex;gap:8px;overflow:auto;
+  padding:10px 0 12px;background:rgba(255,249,247,.92);backdrop-filter:blur(12px)
+}
+.tab{
+  border:0;background:white;color:var(--muted);padding:10px 14px;border-radius:999px;
+  white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.04)
+}
+.tab.active{background:var(--ink);color:white}
+.panel{display:none}
+.panel.active{display:block}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:24px;
+  padding:19px;margin:14px 0;box-shadow:var(--shadow)
+}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}
+.grid .card{margin:0}
+.big-score{font-size:2.5rem;font-weight:800}
+.big-score small{font-size:1rem;color:var(--muted)}
+.bar{height:12px;background:#f4ecee;border-radius:999px;overflow:hidden;margin:10px 0}
+.bar i{
+  display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--peach));
+  border-radius:inherit;transition:.25s
+}
+.muted{color:var(--muted)}
+.tiny{font-size:.82rem}
+.streak{font-size:1.7rem;font-weight:800}
+.row-between{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.pill{background:var(--pink2);padding:7px 11px;border-radius:999px;font-size:.82rem;font-weight:700}
+.task-list{display:grid;gap:9px;margin-top:12px}
+.task{padding:12px 14px;border-radius:16px;background:#fff8f8}
+.task.done{background:#eef7f0}
+.rank-list{display:grid;gap:10px}
+.rank{display:flex;justify-content:space-between;background:#fff8f8;border-radius:16px;padding:12px 14px}
+.field{display:grid;gap:8px;margin:16px 0;font-weight:750}
+.input-wrap{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:16px;background:#fffafa;padding:0 14px}
+.input-wrap input{border:0;outline:0;background:transparent;width:100%;padding:14px 0}
+select{width:100%;border:1px solid var(--line);border-radius:16px;background:#fffafa;padding:14px;color:var(--ink)}
+.choice-group{display:flex;flex-wrap:wrap;gap:8px}
+.choice{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;color:var(--ink)}
+.choice.selected{background:var(--pink2);border-color:#efb7c8;color:#8a5363;font-weight:750}
+.meal-head{display:flex;justify-content:space-between;align-items:center}
+.save-btn{
+  width:100%;border:0;border-radius:18px;padding:16px;
+  background:linear-gradient(135deg,var(--pink),var(--peach));
+  color:white;font-weight:800;font-size:1.05rem;
+  box-shadow:0 10px 24px rgba(232,144,170,.25)
+}
+.save-note{text-align:center;color:#8c6270}
+.awards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.awards div{background:#fff8f8;border-radius:18px;padding:16px;display:grid;gap:5px;font-size:1.25rem}
+.awards strong,.awards span{font-size:.95rem}
+.awards span{color:var(--muted)}
+details{border-bottom:1px solid var(--line);padding:13px 0}
+summary{font-weight:750}
+details p{color:var(--muted);line-height:1.7}
+.score-rules{display:grid;gap:8px}
+.score-rules div{display:flex;justify-content:space-between;background:#fff8f8;border-radius:14px;padding:12px}
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .awards{grid-template-columns:1fr}
+  .hero{align-items:flex-start}
+  .day-box{min-width:100px}
+  .card{border-radius:20px;padding:17px}
+}

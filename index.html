@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7dfe7" />
+  <title>三姐妹減脂日記 ♡</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">三姐妹 90 天挑戰</p>
+        <h1>三姐妹減脂日記 ♡</h1>
+        <p class="hero-copy">每天記一點，一起穩穩前進。</p>
+      </div>
+      <div class="day-box">
+        <span>今天</span>
+        <strong id="dayCount">第 1 / 90 天</strong>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="home">首頁</button>
+      <button class="tab" data-tab="log">每日紀錄</button>
+      <button class="tab" data-tab="ranking">姐妹排行</button>
+      <button class="tab" data-tab="rules">規則</button>
+    </nav>
+
+    <main>
+      <section id="home" class="panel active">
+        <div class="grid">
+          <article class="card">
+            <p class="label">今日總分</p>
+            <div class="big-score"><span id="todayScore">0</span><small>/100</small></div>
+            <div class="bar"><i id="scoreBar"></i></div>
+            <p class="muted" id="scoreMessage">完成今天的紀錄，就能看到分數。</p>
+          </article>
+
+          <article class="card">
+            <p class="label">🔥 連續達標</p>
+            <div class="streak" id="streakCount">0 天</div>
+            <p class="muted">每日總分達 60 分，就延續連續達標。</p>
+          </article>
+        </div>
+
+        <article class="card">
+          <div class="row-between">
+            <div>
+              <p class="label">今日任務</p>
+              <h2>今天完成多少了？</h2>
+            </div>
+            <span class="pill" id="taskProgress">0 / 5</span>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </article>
+
+        <article class="card">
+          <p class="label">本週排行榜</p>
+          <h2>比執行率，不比體重</h2>
+          <div class="rank-list">
+            <div class="rank"><span>🥇 大姐</span><strong>88</strong></div>
+            <div class="rank"><span>🥈 妹妹</span><strong>84</strong></div>
+            <div class="rank"><span>🥉 二姐</span><strong>79</strong></div>
+          </div>
+          <p class="tiny muted">目前是示範資料；之後接上 Supabase 後會改成三姐妹即時排名。</p>
+        </article>
+      </section>
+
+      <section id="log" class="panel">
+        <article class="card">
+          <p class="label">每日紀錄</p>
+          <h2>今天的資料</h2>
+          <label class="field">⚖️ 今日體重
+            <div class="input-wrap">
+              <input id="weight" type="number" step="0.1" min="20" max="250" placeholder="例如 58.4">
+              <span>kg</span>
+            </div>
+          </label>
+        </article>
+
+        <div id="mealCards"></div>
+
+        <article class="card">
+          <p class="label">🏃 運動</p>
+          <label class="field">運動類型
+            <select id="exerciseType">
+              <option value="">沒有 / 未選</option>
+              <option>走路</option>
+              <option>跑步</option>
+              <option>重訓</option>
+              <option>瑜伽</option>
+              <option>羽球</option>
+              <option>游泳</option>
+              <option>其他</option>
+            </select>
+          </label>
+
+          <label class="field">運動時間
+            <div class="input-wrap">
+              <input id="exerciseMinutes" type="number" min="0" max="600" placeholder="0">
+              <span>分鐘</span>
+            </div>
+          </label>
+        </article>
+
+        <article class="card">
+          <p class="label">🌿 今日生活</p>
+
+          <label class="field">🚶 步數
+            <div class="input-wrap">
+              <input id="steps" type="number" min="0" max="100000" placeholder="0">
+              <span>步</span>
+            </div>
+          </label>
+
+          <label class="field">💧 喝水
+            <select id="water">
+              <option value="0">少於 1000 ml</option>
+              <option value="5">1000–1499 ml</option>
+              <option value="8">1500–1999 ml</option>
+              <option value="10">2000 ml 以上</option>
+            </select>
+          </label>
+
+          <label class="field">😴 睡眠
+            <div class="input-wrap">
+              <input id="sleep" type="number" step="0.5" min="0" max="16" placeholder="7">
+              <span>小時</span>
+            </div>
+          </label>
+
+          <div class="field">
+            <span>🌸 今日心情</span>
+            <div class="choice-group" id="moodGroup">
+              <button type="button" class="choice mood" data-value="😵">😵</button>
+              <button type="button" class="choice mood" data-value="🙂">🙂</button>
+              <button type="button" class="choice mood" data-value="😄">😄</button>
+              <button type="button" class="choice mood" data-value="🥳">🥳</button>
+            </div>
+          </div>
+        </article>
+
+        <button id="saveLog" class="save-btn">儲存今天的紀錄 ♡</button>
+        <p id="saveNote" class="save-note"></p>
+      </section>
+
+      <section id="ranking" class="panel">
+        <article class="card">
+          <p class="label">姐妹排行</p>
+          <h2>每週看誰最穩定</h2>
+          <div class="awards">
+            <div>👑 <strong>本週總冠軍</strong><span>大姐</span></div>
+            <div>🥗 <strong>飲食控制王</strong><span>妹妹</span></div>
+            <div>🏃 <strong>運動王</strong><span>二姐</span></div>
+            <div>🔥 <strong>連續打卡王</strong><span>妹妹</span></div>
+          </div>
+          <p class="tiny muted">目前是版面示範；之後會依照三姐妹真實資料自動計算。</p>
+        </article>
+      </section>
+
+      <section id="rules" class="panel">
+        <article class="card">
+          <p class="label">飲食規則</p>
+          <h2>用「吃了什麼」取代主觀判斷</h2>
+
+          <details open>
+            <summary>🍚 什麼算主食？</summary>
+            <p>飯、麵、米粉、冬粉、粥、麵包、吐司、饅頭、地瓜、馬鈴薯、玉米等。</p>
+          </details>
+
+          <details>
+            <summary>🥤 什麼算含糖飲料？</summary>
+            <p>奶茶、汽水、果汁、含糖紅茶／綠茶、手搖飲等。</p>
+          </details>
+
+          <details>
+            <summary>🍰 什麼算甜食？</summary>
+            <p>蛋糕、餅乾、巧克力、冰淇淋、甜甜圈、甜點等。</p>
+          </details>
+
+          <details>
+            <summary>🍟 什麼算炸物？</summary>
+            <p>炸雞、薯條、鹽酥雞、炸豬排、炸魚、炸蝦、甜不辣等。</p>
+          </details>
+        </article>
+
+        <article class="card">
+          <p class="label">100 分制</p>
+          <div class="score-rules">
+            <div><span>🥗 飲食</span><strong>30 分</strong></div>
+            <div><span>🏃 運動</span><strong>30 分</strong></div>
+            <div><span>🚶 步數</span><strong>20 分</strong></div>
+            <div><span>💧 喝水</span><strong>10 分</strong></div>
+            <div><span>😴 睡眠</span><strong>10 分</strong></div>
+          </div>
+          <p class="tiny muted">主食以控制份量為主，不是完全禁止；含糖飲料、甜食與炸物扣分較多。</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
